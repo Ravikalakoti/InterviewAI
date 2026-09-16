@@ -1,292 +1,1013 @@
+
 {% extends 'base.html' %}
 {% block title %}Register - InterviewAI{% endblock %}
 {% block content %}
+
 <div class="auth-container">
-    <div class="auth-card">
-        <div class="auth-header">
-            <span class="auth-icon">🚀</span>
-            <h2>Create Account</h2>
-            <p class="auth-sub">Start your interview practice journey today</p>
-        </div>
 
-        <form method="post" class="auth-form">
-            {% csrf_token %}
+    <div class="register-wrapper">
 
-            <div class="form-row">
-                {% for field in form %}
-                    {% if field.name == 'first_name' or field.name == 'last_name' %}
-                    <div class="form-group half">
-                        <label class="form-label">
-                            {{ field.label }}
-                            {% if field.field.required %}<span class="required">*</span>{% endif %}
-                        </label>
-                        <div class="input-wrapper">
-                            {{ field }}
-                        </div>
-                        {% if field.errors %}
-                        <span class="form-error">{{ field.errors|join:", " }}</span>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-                {% endfor %}
+        <!-- TOP BRAND -->
+        <div class="register-brand">
+
+            <div class="brand-icon">
+                🚀
             </div>
 
-            {% for field in form %}
-                {% if field.name != 'first_name' and field.name != 'last_name' %}
-                <div class="form-group">
-                    <label class="form-label">
-                        {{ field.label }}
-                        {% if field.field.required %}<span class="required">*</span>{% endif %}
-                    </label>
-                    <div class="input-wrapper">
-                        {{ field }}
-                        {% if field.name == 'password1' or field.name == 'password2' %}
-                        <span class="toggle-pw" onclick="togglePassword('{{ field.auto_id }}')">👁</span>
-                        {% endif %}
-                    </div>
-                    {% if field.help_text and field.name == 'password1' %}
-                    <p class="field-help">{{ field.help_text }}</p>
-                    {% endif %}
-                    {% if field.errors %}
-                    <span class="form-error">{{ field.errors|join:", " }}</span>
-                    {% endif %}
+            <div class="brand-name">
+                INTERVIEWAI
+            </div>
+
+            <h2>
+                Create Account
+            </h2>
+
+            <p>
+                Start your interview practice journey today.
+            </p>
+
+        </div>
+
+
+        <!-- REGISTER CARD -->
+        <div class="auth-card register-card" style="margin-left: 12%;">
+
+            <!-- DECORATIVE GLOW -->
+            <div class="card-glow-top"></div>
+            <div class="card-glow-bottom"></div>
+
+
+            <!-- CARD HEADER -->
+            <div class="card-header">
+
+                <div class="secure-label">
+
+                    <span class="status-dot"></span>
+
+                    <span>
+                        QUICK SIGN UP
+                    </span>
+
                 </div>
-                {% endif %}
-            {% endfor %}
 
-            <button type="submit" class="btn-submit">
-                Create Account <span class="arrow">→</span>
-            </button>
-        </form>
+                <h3>
+                    Set up your account
+                </h3>
 
-        <p class="auth-link">Already have an account? <a href="{% url 'login' %}">Sign in here</a></p>
+                <p>
+                    Enter your details to get started.
+                </p>
+
+            </div>
+
+
+            <!-- FORM -->
+            <form method="post" class="auth-form">
+
+                {% csrf_token %}
+
+
+                <!-- FIRST + LAST NAME -->
+                <div class="form-row">
+
+                    {% for field in form %}
+
+                        {% if field.name == 'first_name' or field.name == 'last_name' %}
+
+                        <div class="form-group half">
+
+                            <label class="form-label">
+
+                                {{ field.label }}
+
+                                {% if field.field.required %}
+                                    <span class="required">*</span>
+                                {% endif %}
+
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                {{ field }}
+
+                            </div>
+
+                            {% if field.errors %}
+
+                            <span class="form-error">
+                                {{ field.errors|join:", " }}
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+                </div>
+
+
+                <!-- OTHER FIELDS -->
+                {% for field in form %}
+
+                    {% if field.name != 'first_name' and field.name != 'last_name' %}
+
+                    <div class="form-group">
+
+                        <label class="form-label">
+
+                            {{ field.label }}
+
+                            {% if field.field.required %}
+                                <span class="required">*</span>
+                            {% endif %}
+
+                        </label>
+
+
+                        <div class="input-wrapper">
+
+                            {{ field }}
+
+
+                            {% if field.name == 'password1' or field.name == 'password2' %}
+
+                            <span
+                                class="toggle-pw"
+                                onclick="togglePassword('{{ field.auto_id }}')"
+                            >
+                                👁
+                            </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        {% if field.help_text and field.name == 'password1' %}
+
+                        <p class="field-help">
+                            {{ field.help_text|safe }}
+                        </p>
+
+                        {% endif %}
+
+
+                        {% if field.errors %}
+
+                        <span class="form-error">
+                            {{ field.errors|join:", " }}
+                        </span>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endif %}
+
+                {% endfor %}
+
+
+                <!-- SUBMIT -->
+                <button
+                    type="submit"
+                    class="btn-submit"
+                >
+                    Create Account
+
+                    <span class="arrow">
+                        →
+                    </span>
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+            <div class="divider">
+
+                <div></div>
+
+                <span>
+                    ALREADY A MEMBER?
+                </span>
+
+                <div></div>
+
+            </div>
+
+
+            <!-- LOGIN -->
+            <div class="login-link">
+
+                <p>
+                    Already have an account?
+
+                    <a href="{% url 'login' %}">
+                        Sign in →
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY NOTE -->
+        <div class="security-note">
+
+            <span>🔐</span>
+
+            <span>
+                Secure account · Free interview practice
+            </span>
+
+        </div>
+
     </div>
+
 </div>
 
+
 <style>
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
 .auth-container {
-    min-height: calc(100vh - 140px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 40px 20px;
+    min-height:calc(100vh - 170px);
+
+    width:100% !important;
+    max-width:100% !important;
+
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+
+    margin:0 auto !important;
+    padding:30px 20px !important;
+
+    box-sizing:border-box;
+    position:relative;
 }
 
-.auth-card {
-    background: var(--bg2);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 48px 44px;
-    width: 100%;
-    max-width: 560px;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.4);
+
+/* =========================================
+   WRAPPER
+========================================= */
+
+.register-wrapper {
+    width:100%;
+    max-width:620px;
+
+    margin-left:auto !important;
+    margin-right:auto !important;
+
+    box-sizing:border-box;
+    position:relative;
 }
 
-.auth-header {
-    text-align: center;
-    margin-bottom: 36px;
+
+/* =========================================
+   TOP BRAND
+========================================= */
+
+.register-brand {
+
+    text-align:center;
+
+    margin-bottom:22px;
+
 }
 
-.auth-icon {
-    font-size: 2.8rem;
-    display: block;
-    margin-bottom: 12px;
+
+.brand-icon {
+
+    width:56px;
+
+    height:56px;
+
+    margin:0 auto 13px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:26px;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #6366f1,
+        #06b6d4
+    );
+
+    box-shadow:
+        0 14px 32px rgba(124,58,237,0.22);
+
 }
 
-.auth-header h2 {
-    font-family: 'Space Grotesk', sans-serif;
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 8px;
-    color: var(--text);
+
+.brand-name {
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    color:#8b5cf6;
+
+    margin-bottom:6px;
+
 }
 
-.auth-sub {
-    color: var(--text-muted);
-    font-size: 0.95rem;
+
+.register-brand h2 {
+
+    margin:0 0 6px;
+
+    font-size:28px;
+
+    letter-spacing:-.7px;
+
 }
+
+
+.register-brand p {
+
+    margin:0;
+
+    color:#85899a;
+
+    font-size:12px;
+
+}
+
+
+/* =========================================
+   REGISTER CARD
+========================================= */
+
+.register-card {
+
+    width:100%;
+
+    box-sizing:border-box;
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:30px 36px 25px;
+
+    border-radius:23px;
+
+    background:var(--bg2);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 8px 40px rgba(0,0,0,0.4),
+        0 0 0 1px rgba(124,58,237,0.02);
+
+}
+
+
+/* =========================================
+   DECORATIVE GLOWS
+========================================= */
+
+.card-glow-top {
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    top:-115px;
+
+    right:-70px;
+
+    border-radius:50%;
+
+    background:rgba(139,92,246,0.08);
+
+    pointer-events:none;
+
+}
+
+
+.card-glow-bottom {
+
+    position:absolute;
+
+    width:140px;
+
+    height:140px;
+
+    bottom:-100px;
+
+    left:-70px;
+
+    border-radius:50%;
+
+    background:rgba(6,182,212,0.06);
+
+    pointer-events:none;
+
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.card-header {
+
+    position:relative;
+
+    margin-bottom:20px;
+
+}
+
+
+.secure-label {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:9px;
+
+    margin-bottom:7px;
+
+}
+
+
+.status-dot {
+
+    width:7px;
+
+    height:7px;
+
+    border-radius:50%;
+
+    background:#22c55e;
+
+    box-shadow:
+        0 0 0 5px rgba(34,197,94,0.09);
+
+}
+
+
+.secure-label span:last-child {
+
+    font-size:10px;
+
+    font-weight:800;
+
+    letter-spacing:1.3px;
+
+    color:#777b8d;
+
+}
+
+
+.card-header h3 {
+
+    margin:0 0 4px;
+
+    font-size:19px;
+
+    letter-spacing:-.3px;
+
+}
+
+
+.card-header p {
+
+    margin:0;
+
+    color:#9296a7;
+
+    font-size:11px;
+
+}
+
+
+/* =========================================
+   FORM
+========================================= */
 
 .auth-form {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    width:100%;
+
 }
+
 
 .form-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 4px;
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:16px;
+
+    width:100%;
+
 }
+
 
 .form-group {
-    margin-bottom: 18px;
+
+    margin-bottom:12px;
+
+    width:100%;
+
 }
+
 
 .form-group.half {
-    margin-bottom: 0;
+
+    margin-bottom:12px;
+
 }
+
 
 .form-label {
-    display: block;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    letter-spacing: 0.01em;
+
+    display:block;
+
+    font-size:.76rem;
+
+    font-weight:800;
+
+    color:#85899a;
+
+    margin-bottom:7px;
+
 }
+
 
 .required {
-    color: #ff6b6b;
-    margin-left: 3px;
+
+    color:#ff6b6b;
+
+    margin-left:3px;
+
 }
+
 
 .input-wrapper {
-    position: relative;
+
+    position:relative;
+
+    width:100%;
+
 }
 
-/* Override all Django form inputs */
+
+/* =========================================
+   INPUTS
+========================================= */
+
 .auth-form input[type="text"],
 .auth-form input[type="email"],
 .auth-form input[type="password"],
+.auth-form input[type="number"],
 .auth-form select,
 .auth-form textarea {
-    width: 100%;
-    background: var(--bg3);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: var(--text);
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s, box-shadow 0.2s;
-    appearance: none;
-    -webkit-appearance: none;
+
+    width:100%;
+
+    max-width:100%;
+
+    background:var(--bg3);
+
+    border:1.5px solid var(--border);
+
+    border-radius:10px;
+
+    padding:11px 13px;
+
+    color:var(--text);
+
+    font-size:.86rem;
+
+    font-family:'Inter',sans-serif;
+
+    box-sizing:border-box;
+
+    transition:
+        border-color .2s,
+        box-shadow .2s,
+        background .2s;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+
 }
 
-.auth-form select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b8fa8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 14px center;
-    padding-right: 40px;
-}
+
+/* =========================================
+   INPUT FOCUS
+========================================= */
 
 .auth-form input[type="text"]:focus,
 .auth-form input[type="email"]:focus,
 .auth-form input[type="password"]:focus,
-.auth-form select:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+.auth-form input[type="number"]:focus,
+.auth-form select:focus,
+.auth-form textarea:focus {
+
+    outline:none;
+
+    border-color:#7c3aed;
+
+    box-shadow:
+        0 0 0 3px rgba(124,58,237,0.12);
+
 }
 
-.auth-form input[type="text"]::placeholder,
-.auth-form input[type="email"]::placeholder,
-.auth-form input[type="password"]::placeholder {
-    color: #555870;
+
+/* =========================================
+   PLACEHOLDER
+========================================= */
+
+.auth-form input::placeholder,
+.auth-form textarea::placeholder {
+
+    color:#555870;
+
 }
 
-/* Number input */
-.auth-form input[type="number"] {
-    width: 100%;
-    background: var(--bg3);
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    padding: 13px 16px;
-    color: var(--text);
-    font-size: 1rem;
-    font-family: 'Inter', sans-serif;
-    transition: border-color 0.2s, box-shadow 0.2s;
+
+/* =========================================
+   SELECT
+========================================= */
+
+.auth-form select {
+
+    background-image:url(
+        "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238b8fa8' d='M6 8L1 3h10z'/%3E%3C/svg%3E"
+    );
+
+    background-repeat:no-repeat;
+
+    background-position:right 13px center;
+
+    padding-right:38px;
+
 }
-.auth-form input[type="number"]:focus {
-    outline: none;
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
-}
+
+
+/* =========================================
+   PASSWORD EYE
+========================================= */
 
 .toggle-pw {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: pointer;
-    font-size: 1rem;
-    opacity: 0.5;
-    transition: opacity 0.2s;
-    user-select: none;
+
+    position:absolute;
+
+    right:12px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    font-size:.9rem;
+
+    opacity:.5;
+
+    transition:opacity .2s;
+
+    user-select:none;
+
 }
-.toggle-pw:hover { opacity: 1; }
+
+
+.toggle-pw:hover {
+
+    opacity:1;
+
+}
+
+
+/* =========================================
+   PASSWORD HELP
+========================================= */
 
 .field-help {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-top: 6px;
-    line-height: 1.4;
+
+    font-size:.66rem;
+
+    color:#85899a;
+
+    margin:4px 0 0;
+
+    line-height:1.25;
+
 }
+
+
+/* =========================================
+   ERRORS
+========================================= */
 
 .form-error {
-    display: block;
-    font-size: 0.82rem;
-    color: #ff6b6b;
-    margin-top: 6px;
-    padding: 6px 10px;
-    background: rgba(255,107,107,0.08);
-    border-radius: 6px;
+
+    display:block;
+
+    font-size:.68rem;
+
+    color:#ff6b6b;
+
+    margin-top:4px;
+
+    padding:4px 8px;
+
+    background:rgba(255,107,107,.08);
+
+    border-radius:5px;
+
 }
+
+
+/* =========================================
+   CREATE ACCOUNT BUTTON
+========================================= */
 
 .btn-submit {
-    width: 100%;
-    background: var(--accent);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 15px;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: 'Inter', sans-serif;
-    cursor: pointer;
-    margin-top: 8px;
-    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+
+    width:100%;
+
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #6366f1
+    );
+
+    color:white;
+
+    border:none;
+
+    border-radius:11px;
+
+    padding:12px;
+
+    font-size:.86rem;
+
+    font-weight:800;
+
+    font-family:'Inter',sans-serif;
+
+    cursor:pointer;
+
+    margin-top:4px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:7px;
+
+    transition:
+        transform .15s,
+        box-shadow .2s,
+        opacity .2s;
+
 }
+
+
 .btn-submit:hover {
-    background: #5a52e0;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(108,99,255,0.35);
-}
-.btn-submit:active { transform: translateY(0); }
-.arrow { transition: transform 0.2s; }
-.btn-submit:hover .arrow { transform: translateX(4px); }
 
-.auth-link {
-    text-align: center;
-    margin-top: 24px;
-    font-size: 0.9rem;
-    color: var(--text-muted);
-}
-.auth-link a {
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: 500;
-}
-.auth-link a:hover { text-decoration: underline; }
+    transform:translateY(-1px);
 
-@media (max-width: 600px) {
-    .auth-card { padding: 32px 24px; }
-    .form-row { grid-template-columns: 1fr; }
-    .auth-header h2 { font-size: 1.6rem; }
+    box-shadow:
+        0 8px 24px rgba(124,58,237,.30);
+
 }
+
+
+.btn-submit:active {
+
+    transform:translateY(0);
+
+}
+
+
+.arrow {
+
+    transition:transform .2s;
+
+}
+
+
+.btn-submit:hover .arrow {
+
+    transform:translateX(4px);
+
+}
+
+
+/* =========================================
+   DIVIDER
+========================================= */
+
+.divider {
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin:19px 0 15px;
+
+}
+
+
+.divider div {
+
+    flex:1;
+
+    height:1px;
+
+    background:rgba(120,120,140,0.13);
+
+}
+
+
+.divider span {
+
+    font-size:9px;
+
+    color:#a0a3b0;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+
+/* =========================================
+   LOGIN LINK
+========================================= */
+
+.login-link {
+
+    text-align:center;
+
+}
+
+
+.login-link p {
+
+    margin:0;
+
+    color:#85899a;
+
+    font-size:11px;
+
+}
+
+
+.login-link a {
+
+    color:#7c3aed;
+
+    font-weight:800;
+
+    text-decoration:none;
+
+    margin-left:4px;
+
+}
+
+
+.login-link a:hover {
+
+    text-decoration:underline;
+
+}
+
+
+/* =========================================
+   SECURITY NOTE
+========================================= */
+
+.security-note {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:7px;
+
+    margin-top:13px;
+
+    color:#9a9ead;
+
+    font-size:9px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media (max-width:600px) {
+
+    .auth-container {
+
+        padding:20px 15px;
+
+        align-items:flex-start;
+
+    }
+
+
+    .register-wrapper {
+
+        max-width:100%;
+
+    }
+
+
+    .register-card {
+
+        padding:25px 20px;
+
+    }
+
+
+    .form-row {
+
+        grid-template-columns:1fr;
+
+        gap:0;
+
+    }
+
+
+    .register-brand {
+
+        margin-bottom:20px;
+
+    }
+
+
+    .register-brand h2 {
+
+        font-size:25px;
+
+    }
+
+}
+
 </style>
 
+
 <script>
+
 function togglePassword(fieldId) {
+
     const input = document.getElementById(fieldId);
+
     if (input) {
-        input.type = input.type === 'password' ? 'text' : 'password';
+
+        input.type =
+            input.type === 'password'
+            ? 'text'
+            : 'password';
+
     }
+
 }
+
 </script>
+
 {% endblock %}
