@@ -140,3 +140,6 @@ def interview_result(request, session_id):
 def history(request):
     sessions = InterviewSession.objects.filter(user=request.user, status='completed').order_by('-completed_at')
     return render(request, 'interview/history.html', {'sessions': sessions})
+
+def about(request):
+    return render(request, 'interview/about.html')

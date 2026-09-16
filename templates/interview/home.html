@@ -1,29 +1,768 @@
 {% extends 'base.html' %}
 {% block title %}InterviewAI - Ace Your Next Interview{% endblock %}
 {% block content %}
-<section class="hero">
-    <div class="hero-content">
-        <span class="hero-badge">🎯 Smart Interview Practice</span>
-        <h1>Practice Interviews.<br><span class="accent">Land The Job.</span></h1>
-        <p class="hero-sub">Domain-specific questions, instant AI scoring, and personalized feedback — no external API required.</p>
-        <div class="hero-cta">
-            {% if user.is_authenticated %}
-                <a href="{% url 'start_interview' %}" class="btn-primary btn-large">Start Interview →</a>
-                <a href="{% url 'dashboard' %}" class="btn-outline btn-large">My Dashboard</a>
-            {% else %}
-                <a href="{% url 'register' %}" class="btn-primary btn-large">Start Free →</a>
-                <a href="{% url 'login' %}" class="btn-outline btn-large">Login</a>
-            {% endif %}
+
+<div style="
+    max-width:1180px;
+    margin:0 auto;
+    padding:30px 20px 70px;
+">
+
+<!-- HERO -->
+<section style="
+    position:relative;
+    overflow:hidden;
+    min-height:560px;
+    display:flex;
+    align-items:center;
+    border-radius:30px;
+    padding:70px 65px;
+    margin-bottom:80px;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(6,182,212,.13), transparent 30%),
+        radial-gradient(circle at 15% 85%, rgba(124,58,237,.15), transparent 35%),
+        linear-gradient(135deg, rgba(124,58,237,.055), rgba(6,182,212,.035));
+    border:1px solid rgba(124,58,237,.12);
+    box-shadow:0 25px 70px rgba(40,40,80,.08);
+">
+
+    <!-- Decorative glow -->
+    <div style="
+        position:absolute;
+        width:260px;
+        height:260px;
+        right:-100px;
+        top:-100px;
+        border-radius:50%;
+        background:rgba(124,58,237,.10);
+        filter:blur(30px);
+    "></div>
+
+    <div style="
+        position:absolute;
+        width:220px;
+        height:220px;
+        left:-120px;
+        bottom:-120px;
+        border-radius:50%;
+        background:rgba(6,182,212,.08);
+        filter:blur(30px);
+    "></div>
+
+
+    <div style="
+        position:relative;
+        z-index:2;
+        max-width:720px;
+    ">
+
+        <!-- Badge -->
+        <div style="
+            display:inline-flex;
+            align-items:center;
+            gap:9px;
+            padding:9px 15px;
+            margin-bottom:25px;
+            border-radius:30px;
+            background:rgba(255,255,255,.72);
+            border:1px solid rgba(124,58,237,.13);
+            color:#6d28d9;
+            font-size:11px;
+            font-weight:800;
+            letter-spacing:1px;
+            text-transform:uppercase;
+            box-shadow:0 8px 25px rgba(50,40,90,.05);
+        ">
+            <span style="font-size:14px;">✦</span>
+            AI-Powered Interview Practice
         </div>
+
+
+        <h1 style="
+            margin:0;
+            font-size:clamp(42px,6vw,72px);
+            line-height:1.02;
+            letter-spacing:-2.8px;
+            font-weight:900;
+        ">
+            Practice Smarter.<br>
+
+            <span style="
+                background:linear-gradient(90deg,#7c3aed,#06b6d4);
+                -webkit-background-clip:text;
+                -webkit-text-fill-color:transparent;
+                background-clip:text;
+            ">
+                Interview Better.
+            </span>
+        </h1>
+
+
+        <p style="
+            max-width:650px;
+            margin:25px 0 0;
+            color:#73788a;
+            font-size:16px;
+            line-height:1.8;
+        ">
+            Simulate real interview sessions, answer domain-specific questions,
+            receive instant AI-style evaluation, and track your progress —
+            all inside one focused workspace.
+        </p>
+
+
+        <!-- CTA -->
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:14px;
+            flex-wrap:wrap;
+            margin-top:35px;
+        ">
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'start_interview' %}"
+                   class="btn-primary btn-large"
+                   style="
+                        padding:14px 24px;
+                        font-weight:800;
+                        border-radius:12px;
+                   ">
+                    Start Interview →
+                </a>
+
+                <a href="{% url 'dashboard' %}"
+                   class="btn-outline btn-large"
+                   style="
+                        padding:14px 24px;
+                        border-radius:12px;
+                   ">
+                    Open Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'register' %}"
+                   class="btn-primary btn-large"
+                   style="
+                        padding:14px 26px;
+                        font-weight:800;
+                        border-radius:12px;
+                   ">
+                    Start Practicing Free →
+                </a>
+
+                <a href="{% url 'login' %}"
+                   class="btn-outline btn-large"
+                   style="
+                        padding:14px 24px;
+                        border-radius:12px;
+                   ">
+                    Sign In
+                </a>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- Trust line -->
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:22px;
+            margin-top:30px;
+            flex-wrap:wrap;
+            color:#9296a6;
+            font-size:11px;
+            font-weight:600;
+        ">
+            <span>✓ No external AI API</span>
+            <span>✓ Instant evaluation</span>
+            <span>✓ Practice anytime</span>
+        </div>
+
     </div>
-</section>
-<section class="features">
-    <h2>Everything you need to prepare</h2>
-    <div class="feature-grid">
-        <div class="feature-card"><div class="f-icon">🎯</div><h3>Domain Questions</h3><p>Software, Data Science, Product, Marketing, HR — tailored to your field.</p></div>
-        <div class="feature-card"><div class="f-icon">⚡</div><h3>Instant Scoring</h3><p>Scored on keyword coverage, structure, and specificity — instantly.</p></div>
-        <div class="feature-card"><div class="f-icon">📊</div><h3>Track Progress</h3><p>Session history, average scores, and performance levels.</p></div>
-        <div class="feature-card"><div class="f-icon">💡</div><h3>Actionable Feedback</h3><p>Know exactly what keywords and points to include in ideal answers.</p></div>
+
+
+    <!-- RIGHT VISUAL -->
+    <div style="
+        position:absolute;
+        right:55px;
+        top:50%;
+        transform:translateY(-50%);
+        width:310px;
+        display:none;
+    ">
+
+        <div style="
+            padding:20px;
+            border-radius:22px;
+            background:rgba(255,255,255,.72);
+            border:1px solid rgba(255,255,255,.8);
+            box-shadow:0 25px 60px rgba(50,40,90,.12);
+            backdrop-filter:blur(15px);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                margin-bottom:18px;
+            ">
+                <span style="font-size:10px;font-weight:800;color:#8b5cf6;">
+                    LIVE SESSION
+                </span>
+                <span style="font-size:10px;color:#22c55e;">
+                    ● ACTIVE
+                </span>
+            </div>
+
+            <div style="
+                height:7px;
+                border-radius:10px;
+                background:#eeeef5;
+                overflow:hidden;
+                margin-bottom:22px;
+            ">
+                <div style="
+                    width:68%;
+                    height:100%;
+                    border-radius:10px;
+                    background:linear-gradient(90deg,#7c3aed,#06b6d4);
+                "></div>
+            </div>
+
+            <div style="
+                font-size:12px;
+                color:#8b8fa0;
+                margin-bottom:9px;
+            ">
+                QUESTION 04 / 05
+            </div>
+
+            <div style="
+                font-size:17px;
+                font-weight:800;
+                line-height:1.4;
+                margin-bottom:20px;
+            ">
+                Explain how you would optimize a slow API endpoint.
+            </div>
+
+            <div style="
+                padding:13px;
+                border-radius:13px;
+                background:rgba(124,58,237,.06);
+                color:#777b8c;
+                font-size:11px;
+                line-height:1.6;
+            ">
+                AI evaluation ready after submission...
+            </div>
+
+        </div>
+
     </div>
+
 </section>
+
+
+<!-- PRODUCT INTRO -->
+<section style="
+    margin-bottom:75px;
+">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:flex-end;
+        gap:30px;
+        margin-bottom:30px;
+    ">
+
+        <div>
+            <div style="
+                font-size:10px;
+                letter-spacing:2px;
+                font-weight:900;
+                color:#8b5cf6;
+                margin-bottom:9px;
+            ">
+                YOUR INTERVIEW WORKSPACE
+            </div>
+
+            <h2 style="
+                margin:0 0 10px;
+                font-size:30px;
+                letter-spacing:-.8px;
+            ">
+                Everything you need to prepare
+            </h2>
+
+            <p style="
+                margin:0;
+                color:#888c9d;
+                font-size:13px;
+            ">
+                One workspace. Multiple domains. Measurable improvement.
+            </p>
+        </div>
+
+        <div style="
+            font-size:11px;
+            color:#8b8fa0;
+            padding-bottom:4px;
+        ">
+            BUILT FOR CONSISTENT PRACTICE
+        </div>
+
+    </div>
+
+
+    <!-- FEATURES -->
+    <div style="
+        display:grid;
+        grid-template-columns:repeat(2,minmax(0,1fr));
+        gap:18px;
+    ">
+
+
+        <div class="feature-card" style="
+            padding:30px;
+            min-height:185px;
+            border-radius:20px;
+            position:relative;
+            overflow:hidden;
+            background:linear-gradient(135deg,rgba(124,58,237,.055),rgba(255,255,255,.7));
+            border:1px solid rgba(124,58,237,.10);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                margin-bottom:25px;
+            ">
+                <div style="
+                    width:48px;
+                    height:48px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:15px;
+                    background:rgba(124,58,237,.10);
+                    font-size:21px;
+                ">
+                    🎯
+                </div>
+
+                <span style="
+                    font-size:10px;
+                    font-weight:800;
+                    color:#a0a3b1;
+                ">
+                    01
+                </span>
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:17px;">
+                Domain-Specific Questions
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#85899a;
+                font-size:12px;
+                line-height:1.7;
+            ">
+                Practice questions designed around Software, Data Science,
+                Product, Marketing, HR and other career domains.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card" style="
+            padding:30px;
+            min-height:185px;
+            border-radius:20px;
+            position:relative;
+            overflow:hidden;
+            background:linear-gradient(135deg,rgba(6,182,212,.05),rgba(255,255,255,.7));
+            border:1px solid rgba(6,182,212,.10);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                margin-bottom:25px;
+            ">
+                <div style="
+                    width:48px;
+                    height:48px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:15px;
+                    background:rgba(6,182,212,.10);
+                    font-size:21px;
+                ">
+                    ⚡
+                </div>
+
+                <span style="
+                    font-size:10px;
+                    font-weight:800;
+                    color:#a0a3b1;
+                ">
+                    02
+                </span>
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:17px;">
+                Instant Evaluation
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#85899a;
+                font-size:12px;
+                line-height:1.7;
+            ">
+                Get immediate scoring based on keyword coverage,
+                structure, clarity and answer specificity.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card" style="
+            padding:30px;
+            min-height:185px;
+            border-radius:20px;
+            position:relative;
+            overflow:hidden;
+            background:linear-gradient(135deg,rgba(16,185,129,.045),rgba(255,255,255,.7));
+            border:1px solid rgba(16,185,129,.09);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                margin-bottom:25px;
+            ">
+                <div style="
+                    width:48px;
+                    height:48px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:15px;
+                    background:rgba(16,185,129,.09);
+                    font-size:21px;
+                ">
+                    📊
+                </div>
+
+                <span style="
+                    font-size:10px;
+                    font-weight:800;
+                    color:#a0a3b1;
+                ">
+                    03
+                </span>
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:17px;">
+                Performance Tracking
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#85899a;
+                font-size:12px;
+                line-height:1.7;
+            ">
+                Monitor completed sessions, average scores and
+                your overall performance level over time.
+            </p>
+
+        </div>
+
+
+        <div class="feature-card" style="
+            padding:30px;
+            min-height:185px;
+            border-radius:20px;
+            position:relative;
+            overflow:hidden;
+            background:linear-gradient(135deg,rgba(245,158,11,.045),rgba(255,255,255,.7));
+            border:1px solid rgba(245,158,11,.09);
+        ">
+
+            <div style="
+                display:flex;
+                justify-content:space-between;
+                align-items:flex-start;
+                margin-bottom:25px;
+            ">
+                <div style="
+                    width:48px;
+                    height:48px;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    border-radius:15px;
+                    background:rgba(245,158,11,.09);
+                    font-size:21px;
+                ">
+                    💡
+                </div>
+
+                <span style="
+                    font-size:10px;
+                    font-weight:800;
+                    color:#a0a3b1;
+                ">
+                    04
+                </span>
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:17px;">
+                Actionable Feedback
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#85899a;
+                font-size:12px;
+                line-height:1.7;
+            ">
+                Understand what your answer is missing and what
+                concepts or keywords should be included.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+<section style="
+    padding:45px;
+    margin-bottom:70px;
+    border-radius:25px;
+    background:#fafaff;
+    border:1px solid rgba(120,120,140,.10);
+">
+
+    <div style="
+        text-align:center;
+        margin-bottom:38px;
+    ">
+        <div style="
+            font-size:10px;
+            letter-spacing:2px;
+            font-weight:900;
+            color:#8b5cf6;
+            margin-bottom:8px;
+        ">
+            SIMPLE WORKFLOW
+        </div>
+
+        <h2 style="
+            margin:0 0 8px;
+            font-size:27px;
+        ">
+            From question to improvement
+        </h2>
+
+        <p style="
+            margin:0;
+            color:#888c9d;
+            font-size:12px;
+        ">
+            A focused practice loop designed to make every session useful.
+        </p>
+    </div>
+
+
+    <div style="
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:25px;
+    ">
+
+        <div style="text-align:center;padding:10px 20px;">
+            <div style="
+                width:55px;
+                height:55px;
+                margin:0 auto 17px;
+                border-radius:17px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:rgba(124,58,237,.09);
+                color:#7c3aed;
+                font-size:20px;
+                font-weight:900;
+            ">
+                01
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:15px;">
+                Choose
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#8b8fa0;
+                font-size:11px;
+                line-height:1.7;
+            ">
+                Select your career domain, difficulty and interview length.
+            </p>
+        </div>
+
+
+        <div style="text-align:center;padding:10px 20px;">
+            <div style="
+                width:55px;
+                height:55px;
+                margin:0 auto 17px;
+                border-radius:17px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:rgba(6,182,212,.09);
+                color:#0891b2;
+                font-size:20px;
+                font-weight:900;
+            ">
+                02
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:15px;">
+                Answer
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#8b8fa0;
+                font-size:11px;
+                line-height:1.7;
+            ">
+                Answer realistic questions and structure your responses clearly.
+            </p>
+        </div>
+
+
+        <div style="text-align:center;padding:10px 20px;">
+            <div style="
+                width:55px;
+                height:55px;
+                margin:0 auto 17px;
+                border-radius:17px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:rgba(16,185,129,.09);
+                color:#059669;
+                font-size:20px;
+                font-weight:900;
+            ">
+                03
+            </div>
+
+            <h3 style="margin:0 0 8px;font-size:15px;">
+                Improve
+            </h3>
+
+            <p style="
+                margin:0;
+                color:#8b8fa0;
+                font-size:11px;
+                line-height:1.7;
+            ">
+                Review your score and feedback, then use it in your next session.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FINAL CTA -->
+<section style="
+    text-align:center;
+    padding:60px 30px;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.12), transparent 45%),
+        linear-gradient(135deg,rgba(124,58,237,.055),rgba(6,182,212,.045));
+    border:1px solid rgba(124,58,237,.10);
+">
+
+    <div style="
+        font-size:25px;
+        margin-bottom:15px;
+    ">
+        ✦
+    </div>
+
+    <h2 style="
+        margin:0 0 12px;
+        font-size:30px;
+        letter-spacing:-.8px;
+    ">
+        Your next interview starts here.
+    </h2>
+
+    <p style="
+        max-width:520px;
+        margin:0 auto 28px;
+        color:#85899a;
+        font-size:13px;
+        line-height:1.7;
+    ">
+        Practice consistently, understand your weak areas,
+        and walk into your next interview better prepared.
+    </p>
+
+    {% if user.is_authenticated %}
+
+        <a href="{% url 'start_interview' %}"
+           class="btn-primary"
+           style="
+                padding:14px 25px;
+                font-weight:800;
+                border-radius:12px;
+           ">
+            Start New Interview →
+        </a>
+
+    {% else %}
+
+        <a href="{% url 'register' %}"
+           class="btn-primary"
+           style="
+                padding:14px 25px;
+                font-weight:800;
+                border-radius:12px;
+           ">
+            Create Free Account →
+        </a>
+
+    {% endif %}
+
+</section>
+
+</div>
+
 {% endblock %}
