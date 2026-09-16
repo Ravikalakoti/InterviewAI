@@ -1,0 +1,786 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About - InterviewAI{% endblock %}
+
+{% block content %}
+
+<div class="page-container">
+
+<!-- HERO -->
+
+<section style="
+    max-width:950px;
+    margin:0 auto 65px;
+    padding:65px 45px;
+    text-align:center;
+    border-radius:28px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.13), transparent 45%),
+        linear-gradient(135deg, rgba(124,58,237,.055), rgba(6,182,212,.045));
+    border:1px solid rgba(124,58,237,.10);
+    box-shadow:0 20px 60px rgba(40,40,80,.06);
+">
+
+<div style="
+    width:68px;
+    height:68px;
+    margin:0 auto 20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:20px;
+    background:linear-gradient(135deg,#7c3aed,#06b6d4);
+    color:white;
+    font-size:30px;
+    box-shadow:0 15px 35px rgba(124,58,237,.22);
+">
+    🧠
+</div>
+
+<div style="
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:2px;
+    color:#8b5cf6;
+    margin-bottom:12px;
+">
+    ABOUT INTERVIEWAI
+</div>
+
+<h1 style="
+    margin:0 0 16px;
+    font-size:42px;
+    letter-spacing:-1.5px;
+">
+    Practice Smarter.<br>
+
+    <span style="
+        background:linear-gradient(90deg,#7c3aed,#06b6d4);
+        -webkit-background-clip:text;
+        -webkit-text-fill-color:transparent;
+        background-clip:text;
+    ">
+        Interview Better.
+    </span>
+</h1>
+
+<p style="
+    max-width:650px;
+    margin:0 auto;
+    color:#85899a;
+    font-size:14px;
+    line-height:1.8;
+">
+    InterviewAI is an interview preparation platform designed to
+    help candidates practice realistic questions, evaluate their
+    answers and understand where they can improve.
+</p>
+
+</section>
+
+<!-- WHAT IS INTERVIEWAI -->
+
+<section style="
+    max-width:1050px;
+    margin:0 auto 55px;
+">
+
+<div style="
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:25px;
+">
+
+    <div class="card" style="
+        padding:32px;
+        border-radius:20px;
+    ">
+
+        <div style="
+            font-size:10px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            color:#8b5cf6;
+            margin-bottom:10px;
+        ">
+            THE IDEA
+        </div>
+
+        <h2 style="
+            margin:0 0 14px;
+            font-size:23px;
+        ">
+            What is InterviewAI?
+        </h2>
+
+        <p style="
+            margin:0;
+            color:#85899a;
+            font-size:13px;
+            line-height:1.8;
+        ">
+            InterviewAI provides a structured environment where
+            candidates can simulate interview sessions based on
+            their selected career domain and difficulty level.
+        </p>
+
+        <p style="
+            margin:15px 0 0;
+            color:#85899a;
+            font-size:13px;
+            line-height:1.8;
+        ">
+            Instead of simply reading interview questions,
+            users can actually answer them, receive evaluation
+            and review their previous performance.
+        </p>
+
+    </div>
+
+
+    <div class="card" style="
+        padding:32px;
+        border-radius:20px;
+        background:linear-gradient(
+            135deg,
+            rgba(6,182,212,.045),
+            rgba(124,58,237,.045)
+        );
+    ">
+
+        <div style="
+            font-size:10px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            color:#06a5bd;
+            margin-bottom:10px;
+        ">
+            THE GOAL
+        </div>
+
+        <h2 style="
+            margin:0 0 14px;
+            font-size:23px;
+        ">
+            Why was it built?
+        </h2>
+
+        <p style="
+            margin:0;
+            color:#85899a;
+            font-size:13px;
+            line-height:1.8;
+        ">
+            Many candidates know the technical concepts but
+            struggle to explain them clearly during an interview.
+            InterviewAI focuses on repeated practice and
+            structured feedback.
+        </p>
+
+        <p style="
+            margin:15px 0 0;
+            color:#85899a;
+            font-size:13px;
+            line-height:1.8;
+        ">
+            The goal is simple: make interview preparation more
+            practical, measurable and consistent.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- HOW IT WORKS -->
+
+<section style="
+    max-width:1050px;
+    margin:0 auto 55px;
+    padding:40px;
+    border-radius:24px;
+    background:#fafaff;
+    border:1px solid rgba(120,120,140,.10);
+">
+
+<div style="
+    text-align:center;
+    margin-bottom:35px;
+">
+
+    <div style="
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:2px;
+        color:#8b5cf6;
+        margin-bottom:8px;
+    ">
+        HOW IT WORKS
+    </div>
+
+    <h2 style="
+        margin:0 0 8px;
+        font-size:27px;
+    ">
+        A simple interview practice loop
+    </h2>
+
+    <p style="
+        margin:0;
+        color:#8b8fa0;
+        font-size:12px;
+    ">
+        Choose → Answer → Evaluate → Improve
+    </p>
+
+</div>
+
+
+<div style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+">
+
+    <div style="text-align:center;padding:15px;">
+
+        <div style="
+            width:52px;
+            height:52px;
+            margin:0 auto 15px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            background:rgba(124,58,237,.09);
+            color:#7c3aed;
+            font-weight:900;
+        ">
+            01
+        </div>
+
+        <h3 style="margin:0 0 7px;font-size:15px;">
+            Configure
+        </h3>
+
+        <p style="
+            margin:0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Select your domain, difficulty and number of questions.
+        </p>
+
+    </div>
+
+
+    <div style="text-align:center;padding:15px;">
+
+        <div style="
+            width:52px;
+            height:52px;
+            margin:0 auto 15px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            background:rgba(6,182,212,.09);
+            color:#0891b2;
+            font-weight:900;
+        ">
+            02
+        </div>
+
+        <h3 style="margin:0 0 7px;font-size:15px;">
+            Answer
+        </h3>
+
+        <p style="
+            margin:0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Answer realistic interview questions in your own words.
+        </p>
+
+    </div>
+
+
+    <div style="text-align:center;padding:15px;">
+
+        <div style="
+            width:52px;
+            height:52px;
+            margin:0 auto 15px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            background:rgba(245,158,11,.09);
+            color:#d97706;
+            font-weight:900;
+        ">
+            03
+        </div>
+
+        <h3 style="margin:0 0 7px;font-size:15px;">
+            Evaluate
+        </h3>
+
+        <p style="
+            margin:0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Get a score and detailed feedback on your answer.
+        </p>
+
+    </div>
+
+
+    <div style="text-align:center;padding:15px;">
+
+        <div style="
+            width:52px;
+            height:52px;
+            margin:0 auto 15px;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            border-radius:16px;
+            background:rgba(16,185,129,.09);
+            color:#059669;
+            font-weight:900;
+        ">
+            04
+        </div>
+
+        <h3 style="margin:0 0 7px;font-size:15px;">
+            Improve
+        </h3>
+
+        <p style="
+            margin:0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Review your performance and practice again.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- SCORING -->
+
+<section style="
+    max-width:1050px;
+    margin:0 auto 55px;
+">
+
+<div style="margin-bottom:22px;">
+
+    <div style="
+        font-size:10px;
+        font-weight:900;
+        letter-spacing:1.5px;
+        color:#8b5cf6;
+        margin-bottom:8px;
+    ">
+        EVALUATION ENGINE
+    </div>
+
+    <h2 style="
+        margin:0 0 8px;
+        font-size:27px;
+    ">
+        How answers are evaluated
+    </h2>
+
+    <p style="
+        margin:0;
+        color:#85899a;
+        font-size:12px;
+    ">
+        InterviewAI evaluates multiple aspects of an answer.
+    </p>
+
+</div>
+
+
+<div style="
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+">
+
+    <div class="card" style="padding:24px;border-radius:18px;">
+
+        <div style="font-size:22px;margin-bottom:14px;">
+            🔑
+        </div>
+
+        <strong style="font-size:14px;">
+            Keyword Coverage
+        </strong>
+
+        <p style="
+            margin:9px 0 0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Checks whether important concepts are covered.
+        </p>
+
+    </div>
+
+
+    <div class="card" style="padding:24px;border-radius:18px;">
+
+        <div style="font-size:22px;margin-bottom:14px;">
+            🧩
+        </div>
+
+        <strong style="font-size:14px;">
+            Structure
+        </strong>
+
+        <p style="
+            margin:9px 0 0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Looks at answer organization and response length.
+        </p>
+
+    </div>
+
+
+    <div class="card" style="padding:24px;border-radius:18px;">
+
+        <div style="font-size:22px;margin-bottom:14px;">
+            💬
+        </div>
+
+        <strong style="font-size:14px;">
+            Clarity
+        </strong>
+
+        <p style="
+            margin:9px 0 0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Identifies useful explanation and clarity indicators.
+        </p>
+
+    </div>
+
+
+    <div class="card" style="padding:24px;border-radius:18px;">
+
+        <div style="font-size:22px;margin-bottom:14px;">
+            🎯
+        </div>
+
+        <strong style="font-size:14px;">
+            Specificity
+        </strong>
+
+        <p style="
+            margin:9px 0 0;
+            color:#8b8fa0;
+            font-size:11px;
+            line-height:1.6;
+        ">
+            Rewards concrete examples and specific explanations.
+        </p>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- TECHNOLOGY -->
+
+<section style="
+    max-width:1050px;
+    margin:0 auto 55px;
+    padding:35px;
+    border-radius:22px;
+    background:linear-gradient(
+        135deg,
+        rgba(124,58,237,.045),
+        rgba(6,182,212,.035)
+    );
+    border:1px solid rgba(124,58,237,.09);
+">
+
+<div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:25px;
+    flex-wrap:wrap;
+">
+
+    <div>
+
+        <div style="
+            font-size:10px;
+            font-weight:900;
+            letter-spacing:1.5px;
+            color:#8b5cf6;
+            margin-bottom:8px;
+        ">
+            TECHNOLOGY
+        </div>
+
+        <h2 style="
+            margin:0 0 9px;
+            font-size:24px;
+        ">
+            Built with modern web technologies
+        </h2>
+
+        <p style="
+            margin:0;
+            max-width:600px;
+            color:#85899a;
+            font-size:12px;
+            line-height:1.7;
+        ">
+            InterviewAI uses Django for backend development,
+            SQLite for local data storage and a responsive
+            frontend for the user experience.
+        </p>
+
+    </div>
+
+
+    <div style="
+        display:flex;
+        gap:9px;
+        flex-wrap:wrap;
+        max-width:330px;
+    ">
+
+        <span style="
+            padding:9px 13px;
+            border-radius:20px;
+            background:rgba(124,58,237,.08);
+            color:#6d28d9;
+            font-size:11px;
+            font-weight:800;
+        ">
+            Python
+        </span>
+
+        <span style="
+            padding:9px 13px;
+            border-radius:20px;
+            background:rgba(6,182,212,.08);
+            color:#087f94;
+            font-size:11px;
+            font-weight:800;
+        ">
+            Django
+        </span>
+
+        <span style="
+            padding:9px 13px;
+            border-radius:20px;
+            background:rgba(16,185,129,.08);
+            color:#047857;
+            font-size:11px;
+            font-weight:800;
+        ">
+            SQLite
+        </span>
+
+        <span style="
+            padding:9px 13px;
+            border-radius:20px;
+            background:rgba(245,158,11,.08);
+            color:#b45309;
+            font-size:11px;
+            font-weight:800;
+        ">
+            HTML
+        </span>
+
+        <span style="
+            padding:9px 13px;
+            border-radius:20px;
+            background:rgba(239,68,68,.07);
+            color:#b91c1c;
+            font-size:11px;
+            font-weight:800;
+        ">
+            JavaScript
+        </span>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- CREATOR -->
+
+<section style="
+    max-width:1050px;
+    margin:0 auto 50px;
+    text-align:center;
+    padding:50px 30px;
+    border-radius:25px;
+    background:#fafaff;
+    border:1px solid rgba(120,120,140,.10);
+">
+
+<!-- RAVI PROFILE IMAGE -->
+<div style="
+    width:110px;
+    height:110px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    overflow:hidden;
+    border:4px solid rgba(124,58,237,.15);
+    box-shadow:0 15px 35px rgba(40,40,80,.14);
+    background:#f4f3ff;
+">
+    <img
+        src="{% static 'images/ravi-kalakoti.PNG' %}"
+        alt="Ravi Singh Kalakoti"
+        style="
+            width:100%;
+            height:100%;
+            object-fit:cover;
+            display:block;
+        "
+    >
+</div>
+
+
+<div style="
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.8px;
+    color:#8b5cf6;
+    margin-bottom:8px;
+">
+    BUILT BY
+</div>
+
+
+<h2 style="
+    margin:0 0 8px;
+    font-size:24px;
+">
+    Ravi Singh Kalakoti
+</h2>
+
+
+<p style="
+    max-width:520px;
+    margin:0 auto 22px;
+    color:#85899a;
+    font-size:12px;
+    line-height:1.7;
+">
+    Designed and developed as a practical full-stack project
+    for building a better interview preparation experience.
+</p>
+
+
+<a href="https://github.com/Ravikalakoti"
+   target="_blank"
+   rel="noopener noreferrer"
+   style="
+        display:inline-flex;
+        align-items:center;
+        gap:8px;
+        padding:11px 18px;
+        border-radius:11px;
+        background:#18181b;
+        color:white;
+        text-decoration:none;
+        font-size:11px;
+        font-weight:800;
+   ">
+    View GitHub Profile ↗
+</a>
+
+</section>
+
+<!-- CTA -->
+
+<section style="
+    text-align:center;
+    padding:50px 25px;
+    border-radius:25px;
+    background:
+        radial-gradient(circle at 50% 0%, rgba(124,58,237,.11), transparent 45%),
+        linear-gradient(135deg,rgba(124,58,237,.045),rgba(6,182,212,.04));
+    border:1px solid rgba(124,58,237,.09);
+">
+
+<h2 style="
+    margin:0 0 10px;
+    font-size:27px;
+">
+    Ready to start practicing?
+</h2>
+
+<p style="
+    margin:0 auto 23px;
+    color:#85899a;
+    font-size:12px;
+">
+    Start an interview session and put your skills to the test.
+</p>
+
+
+{% if user.is_authenticated %}
+
+    <a href="{% url 'start_interview' %}"
+       class="btn-primary"
+       style="
+            padding:13px 22px;
+            font-weight:800;
+            border-radius:11px;
+       ">
+        Start Interview →
+    </a>
+
+{% else %}
+
+    <a href="{% url 'register' %}"
+       class="btn-primary"
+       style="
+            padding:13px 22px;
+            font-weight:800;
+            border-radius:11px;
+       ">
+        Get Started Free →
+    </a>
+
+{% endif %}
+
+</section>
+
+</div>
+
+{% endblock %}
