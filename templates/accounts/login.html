@@ -1,17 +1,356 @@
+
 {% extends 'base.html' %}
 {% block title %}Login - InterviewAI{% endblock %}
 {% block content %}
-<div class="auth-container">
-    <div class="auth-card">
-        <h2>🧠 Welcome Back</h2>
-        <p class="auth-sub">Login to continue your interview prep</p>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group"><label>Username</label><input type="text" name="username" required autofocus class="form-input"></div>
-            <div class="form-group"><label>Password</label><input type="password" name="password" required class="form-input"></div>
-            <button type="submit" class="btn-primary btn-full">Login →</button>
-        </form>
-        <p class="auth-link">Don't have an account? <a href="{% url 'register' %}">Register here</a></p>
+
+<div class="auth-container" style="
+    min-height:calc(100vh - 170px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:45px 20px;
+">
+
+    <div style="
+        width:100%;
+        max-width:430px;
+    ">
+
+        <!-- TOP BRAND -->
+        <div style="
+            text-align:center;
+            margin-bottom:26px;
+        ">
+
+            <div style="
+                width:58px;
+                height:58px;
+                margin:0 auto 17px;
+                border-radius:18px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                font-size:27px;
+                background:linear-gradient(
+                    135deg,
+                    #7c3aed,
+                    #6366f1,
+                    #06b6d4
+                );
+                box-shadow:0 14px 32px rgba(124,58,237,0.22);
+            ">
+                🧠
+            </div>
+
+            <div style="
+                font-size:10px;
+                font-weight:800;
+                letter-spacing:2px;
+                color:#8b5cf6;
+                margin-bottom:8px;
+            ">
+                INTERVIEWAI
+            </div>
+
+            <h2 style="
+                margin:0 0 8px;
+                font-size:29px;
+                letter-spacing:-.7px;
+            ">
+                Welcome back
+            </h2>
+
+            <p style="
+                margin:0;
+                color:#85899a;
+                font-size:13px;
+            ">
+                Continue your interview preparation journey.
+            </p>
+
+        </div>
+
+
+        <!-- LOGIN CARD -->
+        <div class="auth-card" style="
+            position:relative;
+            overflow:hidden;
+            padding:34px;
+            border-radius:23px;
+        ">
+
+            <!-- Decorative glow -->
+            <div style="
+                position:absolute;
+                width:150px;
+                height:150px;
+                top:-100px;
+                right:-70px;
+                border-radius:50%;
+                background:rgba(139,92,246,0.08);
+                pointer-events:none;
+            "></div>
+
+            <div style="
+                position:absolute;
+                width:120px;
+                height:120px;
+                bottom:-90px;
+                left:-60px;
+                border-radius:50%;
+                background:rgba(6,182,212,0.06);
+                pointer-events:none;
+            "></div>
+
+
+            <!-- CARD HEADER -->
+            <div style="
+                position:relative;
+                margin-bottom:27px;
+            ">
+
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:9px;
+                    margin-bottom:8px;
+                ">
+
+                    <span style="
+                        width:7px;
+                        height:7px;
+                        border-radius:50%;
+                        background:#22c55e;
+                        box-shadow:0 0 0 5px rgba(34,197,94,0.09);
+                    "></span>
+
+                    <span style="
+                        font-size:10px;
+                        font-weight:800;
+                        letter-spacing:1.3px;
+                        color:#777b8d;
+                    ">
+                        SECURE SIGN IN
+                    </span>
+
+                </div>
+
+                <h3 style="
+                    margin:0 0 5px;
+                    font-size:20px;
+                    letter-spacing:-.3px;
+                ">
+                    Sign in to your account
+                </h3>
+
+                <p style="
+                    margin:0;
+                    color:#9296a7;
+                    font-size:12px;
+                ">
+                    Enter your credentials to continue.
+                </p>
+
+            </div>
+
+
+            <!-- FORM -->
+            <form method="post">
+
+                {% csrf_token %}
+
+
+                <!-- USERNAME -->
+                <div class="form-group" style="
+                    margin-bottom:21px;
+                ">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:8px;
+                        font-size:12px;
+                        font-weight:800;
+                    ">
+                        Username
+                    </label>
+
+                    <div style="
+                        position:relative;
+                    ">
+
+                        <span style="
+                            position:absolute;
+                            left:13px;
+                            top:50%;
+                            transform:translateY(-50%);
+                            font-size:15px;
+                            opacity:.7;
+                            pointer-events:none;
+                        ">
+                            👤
+                        </span>
+
+                        <input
+                            type="text"
+                            name="username"
+                            required
+                            autofocus
+                            class="form-input"
+                            placeholder="Enter your username"
+                            style="
+                                padding-left:42px;
+                                width:100%;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- PASSWORD -->
+                <div class="form-group" style="
+                    margin-bottom:25px;
+                ">
+
+                    <label style="
+                        display:block;
+                        margin-bottom:8px;
+                        font-size:12px;
+                        font-weight:800;
+                    ">
+                        Password
+                    </label>
+
+                    <div style="
+                        position:relative;
+                    ">
+
+                        <span style="
+                            position:absolute;
+                            left:13px;
+                            top:50%;
+                            transform:translateY(-50%);
+                            font-size:15px;
+                            opacity:.7;
+                            pointer-events:none;
+                        ">
+                            🔒
+                        </span>
+
+                        <input
+                            type="password"
+                            name="password"
+                            required
+                            class="form-input"
+                            placeholder="Enter your password"
+                            style="
+                                padding-left:42px;
+                                width:100%;
+                                box-sizing:border-box;
+                            "
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+                <button
+                    type="submit"
+                    class="btn-primary btn-full"
+                    style="
+                        width:100%;
+                        padding:13px 20px;
+                        border-radius:11px;
+                        font-weight:800;
+                        font-size:13px;
+                    "
+                >
+                    Login to InterviewAI →
+                </button>
+
+            </form>
+
+
+            <!-- DIVIDER -->
+            <div style="
+                display:flex;
+                align-items:center;
+                gap:12px;
+                margin:27px 0 22px;
+            ">
+
+                <div style="
+                    flex:1;
+                    height:1px;
+                    background:rgba(120,120,140,0.13);
+                "></div>
+
+                <span style="
+                    font-size:10px;
+                    color:#a0a3b0;
+                    font-weight:700;
+                ">
+                    NEW HERE?
+                </span>
+
+                <div style="
+                    flex:1;
+                    height:1px;
+                    background:rgba(120,120,140,0.13);
+                "></div>
+
+            </div>
+
+
+            <!-- REGISTER -->
+            <div style="
+                text-align:center;
+            ">
+
+                <p style="
+                    margin:0;
+                    color:#85899a;
+                    font-size:12px;
+                ">
+                    Don't have an account?
+                    <a
+                        href="{% url 'register' %}"
+                        style="
+                            color:#7c3aed;
+                            font-weight:800;
+                            text-decoration:none;
+                            margin-left:4px;
+                        "
+                    >
+                        Create one →
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- SECURITY NOTE -->
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            gap:7px;
+            margin-top:18px;
+            color:#9a9ead;
+            font-size:10px;
+        ">
+            <span>🔐</span>
+            <span>Your account information is protected.</span>
+        </div>
+
     </div>
+
 </div>
+
 {% endblock %}
