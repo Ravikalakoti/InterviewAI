@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Dashboard - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="dashboard-header">
+        <div>
+            <h2>Welcome back, {{ user.first_name }}! {{ emoji }}</h2>
+            <p class="text-muted">Domain: {{ profile.get_domain_display }} | Level: <strong>{{ level }}</strong></p>
+        </div>
+        <a href="{% url 'start_interview' %}" class="btn-primary">+ New Interview</a>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card accent"><div class="stat-num">{{ total_sessions }}</div><div class="stat-label">Completed Sessions</div></div>
+        <div class="stat-card"><div class="stat-num">{{ avg_score }}/10</div><div class="stat-label">Average Score</div></div>
+        <div class="stat-card"><div class="stat-num">{{ level }}</div><div class="stat-label">Performance Level</div></div>
+    </div>
+
+    <div class="section-title"><h3>Recent Sessions</h3><a href="{% url 'history' %}">View All →</a></div>
+    {% if sessions %}
+    <div class="sessions-list">
+        {% for session in sessions %}
+        <div class="session-row">
+            <div>
+                <strong>{{ session.get_domain_display|default:session.domain|title }}</strong>
+                <span class="badge badge-{{ session.difficulty }}">{{ session.difficulty }}</span>
+            </div>
+            <div class="session-meta">
+                <span>{{ session.total_questions }} questions</span>
+                <span class="score-pill">{{ session.score }}/10</span>
+                <span class="status-{{ session.status }}">{{ session.status }}</span>
+                {% if session.status == 'active' %}
+                    <a href="{% url 'interview_question' session.id %}" class="btn-sm">Continue</a>
+                {% else %}
+                    <a href="{% url 'interview_result' session.id %}" class="btn-sm">Review</a>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>🎯 No sessions yet. <a href="{% url 'start_interview' %}">Start your first interview!</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

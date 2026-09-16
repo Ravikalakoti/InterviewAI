@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Profile - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container">
+    <h2>👤 Your Profile</h2>
+    <div class="profile-grid">
+        <div class="profile-stats">
+            <div class="stat-card"><div class="stat-num">{{ profile.total_sessions }}</div><div class="stat-label">Sessions</div></div>
+            <div class="stat-card"><div class="stat-num">{{ profile.avg_score }}/10</div><div class="stat-label">Avg Score</div></div>
+        </div>
+        <div class="profile-form card">
+            <h3>Update Profile</h3>
+            <form method="post">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="form-group"><label>{{ field.label }}</label>{{ field }}</div>
+                {% endfor %}
+                <button type="submit" class="btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

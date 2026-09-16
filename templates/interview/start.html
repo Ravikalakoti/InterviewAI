@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% block title %}Start Interview - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container narrow">
+    <h2>🎯 Configure Your Interview</h2>
+    <p class="text-muted">Choose your domain, difficulty, and number of questions.</p>
+    <form method="post" class="card interview-config">
+        {% csrf_token %}
+        <div class="form-group">
+            <label>Career Domain</label>
+            <select name="domain" class="form-input">
+                {% for d in domains %}
+                <option value="{{ d }}" {% if d == user.profile.domain %}selected{% endif %}>{{ d|title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Difficulty Level</label>
+            <div class="radio-group">
+                <label class="radio-label"><input type="radio" name="difficulty" value="easy"> 🟢 Easy</label>
+                <label class="radio-label"><input type="radio" name="difficulty" value="medium" checked> 🟡 Medium</label>
+                <label class="radio-label"><input type="radio" name="difficulty" value="hard"> 🔴 Hard</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Number of Questions</label>
+            <select name="num_questions" class="form-input">
+                <option value="3">3 Questions (Quick)</option>
+                <option value="5" selected>5 Questions (Standard)</option>
+                <option value="8">8 Questions (Full)</option>
+                <option value="10">10 Questions (Extended)</option>
+            </select>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Start Interview 🚀</button>
+    </form>
+</div>
+{% endblock %}

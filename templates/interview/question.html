@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block title %}Question {{ question_number }} - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container narrow">
+    <div class="progress-header">
+        <span>Question {{ question_number }} of {{ total }}</span>
+        <div class="progress-bar"><div class="progress-fill" style="width:{{ progress }}%"></div></div>
+        <span>{{ progress }}%</span>
+    </div>
+
+    <div class="question-card card">
+        <div class="q-meta">
+            <span class="badge badge-{{ sq.question.category }}">{{ sq.question.get_category_display }}</span>
+            <span class="badge badge-{{ sq.question.difficulty }}">{{ sq.question.difficulty|title }}</span>
+        </div>
+        <h3 class="question-text">{{ sq.question.text }}</h3>
+        {% if sq.question.hint %}
+        <details class="hint-box">
+            <summary>💡 Show Hint</summary>
+            <p>{{ sq.question.hint }}</p>
+        </details>
+        {% endif %}
+    </div>
+
+    <form method="post" class="answer-form">
+        {% csrf_token %}
+        <input type="hidden" name="time_taken" id="time_taken" value="0">
+        <div class="form-group">
+            <label>Your Answer</label>
+            <textarea name="answer" class="form-input answer-textarea" placeholder="Type your detailed answer here... Be specific, use examples, and structure your response clearly." rows="8" required></textarea>
+            <div class="char-counter"><span id="word-count">0</span> words — aim for 50-150</div>
+        </div>
+        <button type="submit" class="btn-primary btn-full">Submit Answer →</button>
+    </form>
+</div>
+
+<script>
+let startTime = Date.now();
+const textarea = document.querySelector('textarea[name="answer"]');
+const wordCountEl = document.getElementById('word-count');
+const timeInput = document.getElementById('time_taken');
+
+textarea.addEventListener('input', () => {
+    const words = textarea.value.trim().split(/\s+/).filter(w => w).length;
+    wordCountEl.textContent = words;
+});
+
+document.querySelector('form').addEventListener('submit', () => {
+    timeInput.value = Math.round((Date.now() - startTime) / 1000);
+});
+</script>
+{% endblock %}

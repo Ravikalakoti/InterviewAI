@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Results - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container">
+    <div class="result-header">
+        <div class="result-score-circle">
+            <span class="big-score">{{ session.score }}</span>
+            <span class="score-denom">/10</span>
+        </div>
+        <div class="result-summary">
+            <h2>{{ emoji }} {{ level }}</h2>
+            <p>{{ session.domain|title }} Interview — {{ session.difficulty|title }} difficulty</p>
+            <p class="text-muted">{{ session.total_questions }} questions completed</p>
+        </div>
+    </div>
+
+    <div class="result-actions">
+        <a href="{% url 'start_interview' %}" class="btn-primary">🔁 Practice Again</a>
+        <a href="{% url 'dashboard' %}" class="btn-outline">📊 Dashboard</a>
+    </div>
+
+    <h3 class="section-label">Detailed Review</h3>
+    {% for sq in sq_list %}
+    <div class="review-card card">
+        <div class="review-header">
+            <span class="q-num">Q{{ sq.order|add:1 }}</span>
+            <span class="score-pill {% if sq.score >= 7 %}score-high{% elif sq.score >= 4 %}score-mid{% else %}score-low{% endif %}">{{ sq.score }}/10</span>
+        </div>
+        <p class="review-question">{{ sq.question.text }}</p>
+        <div class="review-answer">
+            <strong>Your Answer:</strong>
+            <p>{% if sq.user_answer %}{{ sq.user_answer }}{% else %}<em>Not answered</em>{% endif %}</p>
+        </div>
+        <div class="feedback-box">
+            <strong>💬 Feedback:</strong>
+            <pre class="feedback-text">{{ sq.feedback }}</pre>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

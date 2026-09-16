@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block title %}History - InterviewAI{% endblock %}
+{% block content %}
+<div class="page-container">
+    <h2>📋 Interview History</h2>
+    {% if sessions %}
+    <div class="sessions-list">
+        {% for session in sessions %}
+        <div class="session-row">
+            <div>
+                <strong>{{ session.domain|title }}</strong>
+                <span class="badge badge-{{ session.difficulty }}">{{ session.difficulty }}</span>
+            </div>
+            <div class="session-meta">
+                <span>{{ session.total_questions }} Qs</span>
+                <span class="score-pill">{{ session.score }}/10</span>
+                <span class="text-muted">{{ session.completed_at|date:"M d, Y" }}</span>
+                <a href="{% url 'interview_result' session.id %}" class="btn-sm">Review</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state"><p>No completed interviews yet. <a href="{% url 'start_interview' %}">Start one!</a></p></div>
+    {% endif %}
+</div>
+{% endblock %}
