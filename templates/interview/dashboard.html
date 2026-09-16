@@ -1,47 +1,459 @@
 {% extends 'base.html' %}
 {% block title %}Dashboard - InterviewAI{% endblock %}
 {% block content %}
+
 <div class="page-container">
-    <div class="dashboard-header">
-        <div>
-            <h2>Welcome back, {{ user.first_name }}! {{ emoji }}</h2>
-            <p class="text-muted">Domain: {{ profile.get_domain_display }} | Level: <strong>{{ level }}</strong></p>
+
+<!-- HEADER -->
+<div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:25px;
+    margin-bottom:38px;
+    padding:8px 4px;
+">
+
+    <div>
+        <div style="
+            font-size:11px;
+            font-weight:800;
+            letter-spacing:2px;
+            color:#8b5cf6;
+            margin-bottom:10px;
+        ">
+            INTERVIEWAI / DASHBOARD
         </div>
-        <a href="{% url 'start_interview' %}" class="btn-primary">+ New Interview</a>
+
+        <h2 style="
+            margin:0 0 9px;
+            font-size:32px;
+            letter-spacing:-0.8px;
+        ">
+            Welcome back, {{ user.first_name }}! {{ emoji }}
+        </h2>
+
+        <p class="text-muted" style="
+            margin:0;
+            font-size:14px;
+        ">
+            Domain: {{ profile.get_domain_display }}
+            <span style="margin:0 8px; opacity:.4;">•</span>
+            Level:
+            <strong>{{ level }}</strong>
+        </p>
     </div>
 
-    <div class="stats-row">
-        <div class="stat-card accent"><div class="stat-num">{{ total_sessions }}</div><div class="stat-label">Completed Sessions</div></div>
-        <div class="stat-card"><div class="stat-num">{{ avg_score }}/10</div><div class="stat-label">Average Score</div></div>
-        <div class="stat-card"><div class="stat-num">{{ level }}</div><div class="stat-label">Performance Level</div></div>
-    </div>
+    <a href="{% url 'start_interview' %}"
+       class="btn-primary"
+       style="
+            padding:13px 20px;
+            white-space:nowrap;
+            font-weight:800;
+       ">
+        + New Interview
+    </a>
 
-    <div class="section-title"><h3>Recent Sessions</h3><a href="{% url 'history' %}">View All →</a></div>
-    {% if sessions %}
-    <div class="sessions-list">
-        {% for session in sessions %}
-        <div class="session-row">
-            <div>
-                <strong>{{ session.get_domain_display|default:session.domain|title }}</strong>
-                <span class="badge badge-{{ session.difficulty }}">{{ session.difficulty }}</span>
-            </div>
-            <div class="session-meta">
-                <span>{{ session.total_questions }} questions</span>
-                <span class="score-pill">{{ session.score }}/10</span>
-                <span class="status-{{ session.status }}">{{ session.status }}</span>
-                {% if session.status == 'active' %}
-                    <a href="{% url 'interview_question' session.id %}" class="btn-sm">Continue</a>
-                {% else %}
-                    <a href="{% url 'interview_result' session.id %}" class="btn-sm">Review</a>
-                {% endif %}
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-    {% else %}
-    <div class="empty-state">
-        <p>🎯 No sessions yet. <a href="{% url 'start_interview' %}">Start your first interview!</a></p>
-    </div>
-    {% endif %}
 </div>
+
+
+<!-- STATS -->
+<div style="
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:20px;
+    margin-bottom:42px;
+">
+
+    <!-- SESSIONS -->
+    <div class="stat-card accent" style="
+        padding:25px;
+        min-height:145px;
+        border-radius:19px;
+        position:relative;
+        overflow:hidden;
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:22px;
+        ">
+            <span style="
+                font-size:11px;
+                font-weight:800;
+                letter-spacing:1px;
+                color:#7c3aed;
+            ">
+                ACTIVITY
+            </span>
+
+            <span style="font-size:22px;">🎯</span>
+        </div>
+
+        <div class="stat-num" style="
+            font-size:32px;
+            margin-bottom:6px;
+        ">
+            {{ total_sessions }}
+        </div>
+
+        <div class="stat-label">
+            Completed Sessions
+        </div>
+
+    </div>
+
+
+    <!-- SCORE -->
+    <div class="stat-card" style="
+        padding:25px;
+        min-height:145px;
+        border-radius:19px;
+        position:relative;
+        overflow:hidden;
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:22px;
+        ">
+            <span style="
+                font-size:11px;
+                font-weight:800;
+                letter-spacing:1px;
+                color:#06a6c8;
+            ">
+                PERFORMANCE
+            </span>
+
+            <span style="font-size:22px;">⚡</span>
+        </div>
+
+        <div class="stat-num" style="
+            font-size:32px;
+            margin-bottom:6px;
+        ">
+            {{ avg_score }}/10
+        </div>
+
+        <div class="stat-label">
+            Average Score
+        </div>
+
+    </div>
+
+
+    <!-- LEVEL -->
+    <div class="stat-card" style="
+        padding:25px;
+        min-height:145px;
+        border-radius:19px;
+        position:relative;
+        overflow:hidden;
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-bottom:22px;
+        ">
+            <span style="
+                font-size:11px;
+                font-weight:800;
+                letter-spacing:1px;
+                color:#8b5cf6;
+            ">
+                CURRENT STATUS
+            </span>
+
+            <span style="font-size:22px;">🏆</span>
+        </div>
+
+        <div class="stat-num" style="
+            font-size:27px;
+            margin-bottom:8px;
+        ">
+            {{ level }}
+        </div>
+
+        <div class="stat-label">
+            Performance Level
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- RECENT SESSIONS HEADER -->
+<div style="
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+    padding:0 3px;
+">
+
+    <div>
+        <div style="
+            font-size:10px;
+            font-weight:800;
+            letter-spacing:1.5px;
+            color:#8b5cf6;
+            margin-bottom:5px;
+        ">
+            ACTIVITY
+        </div>
+
+        <h3 style="
+            margin:0;
+            font-size:21px;
+        ">
+            Recent Sessions
+        </h3>
+    </div>
+
+    <a href="{% url 'history' %}" style="
+        font-size:13px;
+        font-weight:700;
+    ">
+        View All →
+    </a>
+
+</div>
+
+
+<!-- SESSIONS -->
+{% if sessions %}
+
+<div class="sessions-list" style="
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+">
+
+    {% for session in sessions %}
+
+    <div class="session-row" style="
+        padding:20px 22px;
+        border-radius:16px;
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        gap:20px;
+        background:rgba(255,255,255,0.75);
+        border:1px solid rgba(120,120,140,0.12);
+        box-shadow:0 6px 22px rgba(30,35,60,0.04);
+    ">
+
+        <!-- SESSION INFO -->
+        <div style="
+            display:flex;
+            align-items:center;
+            gap:14px;
+            min-width:0;
+        ">
+
+            <div style="
+                width:42px;
+                height:42px;
+                flex-shrink:0;
+                border-radius:12px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                background:rgba(139,92,246,0.09);
+                font-size:18px;
+            ">
+                🎯
+            </div>
+
+            <div>
+                <div style="
+                    display:flex;
+                    align-items:center;
+                    gap:10px;
+                    flex-wrap:wrap;
+                    margin-bottom:5px;
+                ">
+                    <strong style="font-size:14px;">
+                        {{ session.get_domain_display|default:session.domain|title }}
+                    </strong>
+
+                    <span class="badge badge-{{ session.difficulty }}">
+                        {{ session.difficulty }}
+                    </span>
+                </div>
+
+                <span style="
+                    font-size:11px;
+                    color:#969aaa;
+                ">
+                    Interview Session
+                </span>
+            </div>
+
+        </div>
+
+
+        <!-- SESSION META -->
+        <div class="session-meta" style="
+            display:flex;
+            align-items:center;
+            gap:18px;
+            flex-wrap:wrap;
+            justify-content:flex-end;
+        ">
+
+            <span style="
+                font-size:12px;
+                color:#7d8293;
+            ">
+                {{ session.total_questions }} questions
+            </span>
+
+            <span class="score-pill" style="
+                font-weight:800;
+                padding:7px 11px;
+            ">
+                {{ session.score }}/10
+            </span>
+
+            <span class="status-{{ session.status }}" style="
+                font-size:11px;
+                font-weight:800;
+                text-transform:capitalize;
+            ">
+                {{ session.status }}
+            </span>
+
+            {% if session.status == 'active' %}
+
+                <a href="{% url 'interview_question' session.id %}"
+                   class="btn-sm"
+                   style="
+                        padding:8px 13px;
+                        font-weight:700;
+                   ">
+                    Continue
+                </a>
+
+            {% else %}
+
+                <a href="{% url 'interview_result' session.id %}"
+                   class="btn-sm"
+                   style="
+                        padding:8px 13px;
+                        font-weight:700;
+                   ">
+                    Review
+                </a>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% else %}
+
+<!-- EMPTY STATE -->
+<div class="empty-state" style="
+    padding:60px 30px;
+    text-align:center;
+    border-radius:20px;
+    border:1px dashed rgba(120,120,140,0.2);
+    background:rgba(139,92,246,0.025);
+">
+
+    <div style="
+        width:64px;
+        height:64px;
+        margin:0 auto 18px;
+        border-radius:18px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        background:rgba(139,92,246,0.08);
+        font-size:28px;
+    ">
+        🎯
+    </div>
+
+    <h3 style="
+        margin:0 0 8px;
+    ">
+        No interviews yet
+    </h3>
+
+    <p style="
+        margin:0 0 20px;
+        color:#8b8fa0;
+        font-size:13px;
+    ">
+        Start your first interview and your performance will appear here.
+    </p>
+
+    <a href="{% url 'start_interview' %}" class="btn-primary">
+        Start First Interview →
+    </a>
+
+</div>
+
+{% endif %}
+
+
+<!-- BOTTOM MOTIVATION -->
+<div style="
+    margin-top:35px;
+    padding:22px 25px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    background:linear-gradient(
+        135deg,
+        rgba(124,58,237,0.07),
+        rgba(6,182,212,0.06)
+    );
+    border:1px solid rgba(139,92,246,0.10);
+">
+
+    <div style="
+        font-size:25px;
+    ">
+        💡
+    </div>
+
+    <div>
+        <strong style="
+            display:block;
+            margin-bottom:4px;
+            font-size:13px;
+        ">
+            Keep improving, one interview at a time.
+        </strong>
+
+        <span style="
+            font-size:12px;
+            color:#8b8fa0;
+        ">
+            Practice consistently to understand your strengths and gaps.
+        </span>
+    </div>
+
+</div>
+
+</div>
+
 {% endblock %}

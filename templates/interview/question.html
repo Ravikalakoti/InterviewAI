@@ -1,37 +1,270 @@
 {% extends 'base.html' %}
 {% block title %}Question {{ question_number }} - InterviewAI{% endblock %}
 {% block content %}
+
 <div class="page-container narrow">
-    <div class="progress-header">
-        <span>Question {{ question_number }} of {{ total }}</span>
-        <div class="progress-bar"><div class="progress-fill" style="width:{{ progress }}%"></div></div>
-        <span>{{ progress }}%</span>
+
+<!-- PROGRESS -->
+<div style="
+    margin-bottom:28px;
+    padding:16px 20px;
+    border-radius:16px;
+    background:rgba(255,255,255,0.75);
+    border:1px solid rgba(120,120,140,0.12);
+    box-shadow:0 5px 20px rgba(30,35,60,0.04);
+">
+
+    <div style="
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:11px;
+        font-size:12px;
+        font-weight:700;
+    ">
+        <span style="color:#555b6d;">
+            Question {{ question_number }} of {{ total }}
+        </span>
+
+        <span style="color:#7c3aed;">
+            {{ progress }}%
+        </span>
     </div>
 
-    <div class="question-card card">
-        <div class="q-meta">
-            <span class="badge badge-{{ sq.question.category }}">{{ sq.question.get_category_display }}</span>
-            <span class="badge badge-{{ sq.question.difficulty }}">{{ sq.question.difficulty|title }}</span>
+    <div class="progress-bar" style="
+        height:7px;
+        border-radius:20px;
+        overflow:hidden;
+    ">
+        <div class="progress-fill"
+             style="
+                width:{{ progress }}%;
+                height:100%;
+                border-radius:20px;
+                background:linear-gradient(90deg,#7c3aed,#06b6d4);
+             ">
         </div>
-        <h3 class="question-text">{{ sq.question.text }}</h3>
-        {% if sq.question.hint %}
-        <details class="hint-box">
-            <summary>💡 Show Hint</summary>
-            <p>{{ sq.question.hint }}</p>
-        </details>
-        {% endif %}
     </div>
 
-    <form method="post" class="answer-form">
-        {% csrf_token %}
-        <input type="hidden" name="time_taken" id="time_taken" value="0">
-        <div class="form-group">
-            <label>Your Answer</label>
-            <textarea name="answer" class="form-input answer-textarea" placeholder="Type your detailed answer here... Be specific, use examples, and structure your response clearly." rows="8" required></textarea>
-            <div class="char-counter"><span id="word-count">0</span> words — aim for 50-150</div>
+</div>
+
+
+<!-- QUESTION -->
+<div class="question-card card" style="
+    padding:34px 38px;
+    border-radius:22px;
+    margin-bottom:22px;
+    position:relative;
+    overflow:hidden;
+">
+
+    <!-- TOP ACCENT -->
+    <div style="
+        position:absolute;
+        top:0;
+        left:0;
+        right:0;
+        height:3px;
+        background:linear-gradient(90deg,#7c3aed,#06b6d4);
+    "></div>
+
+
+    <!-- META -->
+    <div class="q-meta" style="
+        display:flex;
+        gap:9px;
+        flex-wrap:wrap;
+        margin-bottom:24px;
+    ">
+
+        <span class="badge badge-{{ sq.question.category }}">
+            {{ sq.question.get_category_display }}
+        </span>
+
+        <span class="badge badge-{{ sq.question.difficulty }}">
+            {{ sq.question.difficulty|title }}
+        </span>
+
+    </div>
+
+
+    <!-- QUESTION NUMBER -->
+    <div style="
+        font-size:11px;
+        font-weight:800;
+        letter-spacing:1.5px;
+        color:#8b5cf6;
+        margin-bottom:9px;
+    ">
+        INTERVIEW QUESTION
+    </div>
+
+
+    <h3 class="question-text" style="
+        font-size:24px;
+        line-height:1.45;
+        margin:0;
+        letter-spacing:-0.3px;
+    ">
+        {{ sq.question.text }}
+    </h3>
+
+
+    <!-- HINT -->
+    {% if sq.question.hint %}
+
+    <details class="hint-box" style="
+        margin-top:27px;
+        padding:14px 17px;
+        border-radius:13px;
+        background:rgba(139,92,246,0.055);
+        border:1px solid rgba(139,92,246,0.12);
+    ">
+
+        <summary style="
+            cursor:pointer;
+            font-size:13px;
+            font-weight:700;
+            color:#7c3aed;
+        ">
+            💡 Show Hint
+        </summary>
+
+        <p style="
+            margin:12px 0 2px;
+            color:#686d7d;
+            font-size:13px;
+            line-height:1.6;
+        ">
+            {{ sq.question.hint }}
+        </p>
+
+    </details>
+
+    {% endif %}
+
+</div>
+
+
+<!-- ANSWER -->
+<form method="post" class="answer-form">
+
+    {% csrf_token %}
+
+    <input type="hidden" name="time_taken" id="time_taken" value="0">
+
+
+    <div class="card" style="
+        padding:30px 34px;
+        border-radius:22px;
+    ">
+
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:15px;
+            margin-bottom:14px;
+        ">
+
+            <div>
+                <label style="
+                    font-size:14px;
+                    font-weight:800;
+                ">
+                    Your Answer
+                </label>
+
+                <div style="
+                    margin-top:4px;
+                    font-size:11px;
+                    color:#969aaa;
+                ">
+                    Explain your thinking clearly and use relevant examples.
+                </div>
+            </div>
+
+            <div style="
+                padding:7px 11px;
+                border-radius:9px;
+                background:rgba(6,182,212,0.07);
+                color:#0891b2;
+                font-size:10px;
+                font-weight:800;
+                white-space:nowrap;
+            ">
+                ✦ AI EVALUATION
+            </div>
+
         </div>
-        <button type="submit" class="btn-primary btn-full">Submit Answer →</button>
-    </form>
+
+
+        <textarea
+            name="answer"
+            class="form-input answer-textarea"
+            placeholder="Type your detailed answer here... Be specific, use examples, and structure your response clearly."
+            rows="8"
+            required
+            style="
+                width:100%;
+                box-sizing:border-box;
+                min-height:210px;
+                resize:vertical;
+                padding:17px;
+                border-radius:14px;
+                line-height:1.6;
+                font-size:14px;
+            "
+        ></textarea>
+
+
+        <!-- WORD COUNT -->
+        <div style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            margin-top:10px;
+            font-size:11px;
+            color:#9296a6;
+        ">
+
+            <div>
+                <span id="word-count">0</span> words
+                <span style="margin:0 5px;">—</span>
+                aim for 50-150
+            </div>
+
+            <div>
+                💡 Be specific
+            </div>
+
+        </div>
+
+
+        <!-- SUBMIT -->
+        <div style="
+            margin-top:25px;
+            padding-top:22px;
+            border-top:1px solid rgba(120,120,140,0.12);
+        ">
+
+            <button type="submit"
+                    class="btn-primary btn-full"
+                    style="
+                        min-height:52px;
+                        font-size:14px;
+                        font-weight:800;
+                    ">
+                Submit Answer →
+            </button>
+
+        </div>
+
+    </div>
+
+</form>
+```
+
 </div>
 
 <script>
@@ -49,4 +282,5 @@ document.querySelector('form').addEventListener('submit', () => {
     timeInput.value = Math.round((Date.now() - startTime) / 1000);
 });
 </script>
+
 {% endblock %}
