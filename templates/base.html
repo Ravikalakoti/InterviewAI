@@ -1,163 +1,922 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>{% block title %}InterviewAI{% endblock %}</title>
 
-{% load static %}
+    {% load static %}
 
-<link rel="stylesheet" href="{% static 'css/style.css' %}">
-
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
+
 <body>
+
+
+<!-- =====================================================
+     NAVBAR
+===================================================== -->
 
 <nav class="navbar">
 
-<a href="{% url 'home' %}"
-   class="nav-brand"
-   style="
-        display:flex;
-        align-items:center;
-        gap:8px;
-        text-decoration:none;
-   ">
+    <a href="{% url 'home' %}"
+       class="nav-brand"
+       style="
+            display:flex;
+            align-items:center;
+            gap:8px;
+            text-decoration:none;
+       ">
 
-    <span style="font-size:21px;">🧠</span>
+        <span style="font-size:21px;">🧠</span>
 
-    <span>
-        <strong>InterviewAI</strong>
-    </span>
+        <span>
+            <strong>InterviewAI</strong>
+        </span>
 
-</a>
+    </a>
 
 
-<div class="nav-links">
+    <div class="nav-links">
 
-    {% if user.is_authenticated %}
+        {% if user.is_authenticated %}
 
-        <a href="{% url 'dashboard' %}">
-            Dashboard
-        </a>
-        <a href="{% url 'about' %}">About</a>
+            <a href="{% url 'dashboard' %}">
+                Dashboard
+            </a>
 
-        <a href="{% url 'start_interview' %}">
-            New Interview
-        </a>
+            <a href="{% url 'about' %}">
+                About
+            </a>
 
-        <a href="{% url 'history' %}">
-            History
-        </a>
+            <a href="{% url 'start_interview' %}">
+                New Interview
+            </a>
 
-        <a href="{% url 'profile' %}">
-            {{ user.first_name }}
-        </a>
+            <a href="{% url 'history' %}">
+                History
+            </a>
 
-        <a href="{% url 'logout' %}"
-           class="btn-outline">
-            Logout
-        </a>
+            <a href="{% url 'profile' %}">
+                {{ user.first_name }}
+            </a>
 
-    {% else %}
+            <a href="{% url 'logout' %}"
+               class="btn-outline">
+                Logout
+            </a>
 
-        <a href="{% url 'login' %}">
-            Login
-        </a>
-        <a href="{% url 'about' %}">About</a>
+        {% else %}
 
-        <a href="{% url 'register' %}"
-           class="btn-secondary">
-            Get Started
-        </a>
+            <a href="{% url 'login' %}">
+                Login
+            </a>
 
-    {% endif %}
+            <a href="{% url 'about' %}">
+                About
+            </a>
 
-</div>
+            <a href="{% url 'register' %}"
+               class="btn-secondary">
+                Get Started
+            </a>
 
-</nav>
-
-<main class="main-content">
-{% if messages %}
-
-    <div class="messages-container">
-
-        {% for message in messages %}
-
-            <div class="alert alert-{{ message.tags }}">
-                {{ message }}
-            </div>
-
-        {% endfor %}
+        {% endif %}
 
     </div>
 
-{% endif %}
+</nav>
 
 
-{% block content %}{% endblock %}
+
+<!-- =====================================================
+     MAIN CONTENT
+===================================================== -->
+
+<main class="main-content">
+
+    {% if messages %}
+
+        <div class="messages-container">
+
+            {% for message in messages %}
+
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+
+    {% block content %}{% endblock %}
 
 </main>
 
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer class="footer">
-<div style="
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:9px;
-    flex-wrap:wrap;
-    margin-bottom:7px;
-">
 
-    <span style="font-size:15px;">
-        🧠
-    </span>
-
-    <strong style="font-size:13px;">
-        InterviewAI
-    </strong>
-
-    <span style="
-        color:#b0b3bf;
-        font-size:11px;
+    <div style="
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        gap:9px;
+        flex-wrap:wrap;
+        margin-bottom:7px;
     ">
-        ·
-    </span>
 
-    <span style="
-        font-size:11px;
-        color:#85899a;
-    ">
-        Built by
-    </span>
+        <span style="font-size:15px;">
+            🧠
+        </span>
 
-    <a href="https://github.com/Ravikalakoti"
-       target="_blank"
-       rel="noopener noreferrer"
-       style="
+        <strong style="font-size:13px;">
+            InterviewAI
+        </strong>
+
+        <span style="
+            color:#b0b3bf;
             font-size:11px;
-            font-weight:800;
-            color:#7c3aed;
-            text-decoration:none;
-            letter-spacing:.2px;
-       ">
-        Ravi Singh Kalakoti ↗
-    </a>
+        ">
+            ·
+        </span>
+
+        <span style="
+            font-size:11px;
+            color:#85899a;
+        ">
+            Built by
+        </span>
+
+        <a href="https://github.com/Ravikalakoti"
+           target="_blank"
+           rel="noopener noreferrer"
+           style="
+                font-size:11px;
+                font-weight:800;
+                color:#7c3aed;
+                text-decoration:none;
+                letter-spacing:.2px;
+           ">
+            Ravi Singh Kalakoti ↗
+        </a>
+
+    </div>
+
+
+    <p style="
+        margin:0;
+        font-size:10px;
+        color:#a0a3b0;
+    ">
+        Practice makes progress · No external AI API used
+    </p>
+
+</footer>
+
+
+
+<!-- =====================================================
+     CUSTOMER SUPPORT WIDGET
+===================================================== -->
+
+<div id="support-widget">
+
+
+    <!-- =================================================
+         CHAT WINDOW
+    ================================================== -->
+
+    <div id="support-chat"
+         class="support-chat">
+
+
+        <!-- =================================================
+             SUPPORT HEADER
+        ================================================== -->
+
+        <div class="support-header">
+
+
+            <div class="support-profile">
+
+
+                <!-- Ravi Profile Image -->
+
+                <img
+                    src="{% static 'images/ravi-kalakoti.PNG' %}"
+                    alt="Ravi Singh Kalakoti"
+                    class="support-avatar"
+                >
+
+
+                <!-- Name + Assistant -->
+
+                <div class="support-profile-text">
+
+                    <strong>
+                        Namaste 👋 I'm Ravi
+                    </strong>
+
+                    <span>
+                        InterviewAI Assistant
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- Close Button -->
+
+            <button
+                id="support-close"
+                type="button"
+                aria-label="Close support">
+
+                ×
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             MESSAGES
+        ================================================== -->
+
+        <div
+            id="support-messages"
+            class="support-messages">
+
+
+            <!-- Initial Bot Message -->
+
+            <div class="support-message bot">
+
+                Namaste 👋 I'm Ravi, your InterviewAI Assistant.
+
+                <br><br>
+
+                I can help you with InterviewAI,
+                interviews, scoring, domains,
+                difficulty levels, dashboard,
+                history, profile and other features.
+
+                <br><br>
+
+                How can I help you today?
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             QUICK QUESTIONS
+        ================================================== -->
+
+        <div class="support-quick">
+
+
+            <button
+                type="button"
+                onclick="askQuickQuestion('What is InterviewAI?')">
+
+                What is InterviewAI?
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="askQuickQuestion('How does scoring work?')">
+
+                Scoring
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="askQuickQuestion('How do I start an interview?')">
+
+                Start Interview
+
+            </button>
+
+
+            <button
+                type="button"
+                onclick="askQuickQuestion('What domains are available?')">
+
+                Domains
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             INPUT
+        ================================================== -->
+
+        <div class="support-input-area">
+
+
+            <input
+                type="text"
+                id="support-input"
+                placeholder="Ask about InterviewAI..."
+                autocomplete="off"
+            >
+
+
+            <button
+                id="support-send"
+                type="button"
+                aria-label="Send message">
+
+                ➤
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- =================================================
+         FLOATING SUPPORT BUTTON
+    ================================================== -->
+
+    <button
+        id="support-button"
+        class="support-button"
+        type="button"
+        aria-label="Open InterviewAI Support">
+
+        💬
+
+    </button>
+
 
 </div>
 
 
-<p style="
-    margin:0;
-    font-size:10px;
-    color:#a0a3b0;
-">
-    Practice makes progress · No external AI API used
-</p>
 
-</footer>
+<!-- =====================================================
+     CUSTOMER SUPPORT CSS
+===================================================== -->
+
+<style>
+
+
+/* =====================================================
+   SUPPORT CONTAINER
+===================================================== */
+
+#support-widget {
+
+    position: fixed;
+
+    right: 24px;
+
+    bottom: 24px;
+
+    z-index: 9999;
+
+    font-family: inherit;
+
+}
+
+
+
+/* =====================================================
+   FLOATING BUTTON
+===================================================== */
+
+.support-button {
+
+    width: 58px;
+
+    height: 58px;
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: #7c3aed;
+
+    color: white;
+
+    font-size: 24px;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.20);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+
+}
+
+
+.support-button:hover {
+
+    transform: scale(1.06);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.25);
+
+}
+
+
+
+/* =====================================================
+   CHAT WINDOW
+===================================================== */
+
+.support-chat {
+
+    display: none;
+
+    position: absolute;
+
+    right: 0;
+
+    bottom: 72px;
+
+    width: 360px;
+
+    height: 560px;
+
+    background: #ffffff;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    border: 1px solid #e8e8ef;
+
+    box-shadow:
+        0 15px 50px rgba(0, 0, 0, 0.20);
+
+    flex-direction: column;
+
+}
+
+
+
+/* =====================================================
+   SUPPORT HEADER
+===================================================== */
+
+.support-header {
+
+    background: #7c3aed;
+
+    color: white;
+
+    padding: 14px 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+
+/* =====================================================
+   PROFILE AREA
+===================================================== */
+
+.support-profile {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    min-width: 0;
+
+}
+
+
+
+/* =====================================================
+   RAVI IMAGE
+===================================================== */
+
+.support-avatar {
+
+    width: 44px;
+
+    height: 44px;
+
+    min-width: 44px;
+
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 2px solid rgba(255, 255, 255, 0.9);
+
+    background: white;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.15);
+
+}
+
+
+
+/* =====================================================
+   PROFILE TEXT
+===================================================== */
+
+.support-profile-text {
+
+    min-width: 0;
+
+}
+
+
+.support-profile-text strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+}
+
+
+.support-profile-text span {
+
+    display: block;
+
+    margin-top: 3px;
+
+    font-size: 11px;
+
+    opacity: 0.9;
+
+    white-space: nowrap;
+
+}
+
+
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+#support-close {
+
+    border: none;
+
+    background: transparent;
+
+    color: white;
+
+    font-size: 25px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    padding: 2px 4px;
+
+}
+
+
+#support-close:hover {
+
+    opacity: 0.8;
+
+}
+
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+.support-messages {
+
+    flex: 1;
+
+    padding: 16px;
+
+    overflow-y: auto;
+
+    background: #f8f7fc;
+
+}
+
+
+
+/* =====================================================
+   MESSAGE COMMON
+===================================================== */
+
+.support-message {
+
+    max-width: 85%;
+
+    padding: 11px 13px;
+
+    border-radius: 12px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    margin-bottom: 10px;
+
+    word-wrap: break-word;
+
+}
+
+
+
+/* =====================================================
+   BOT MESSAGE
+===================================================== */
+
+.support-message.bot {
+
+    background: #ffffff;
+
+    color: #333333;
+
+    border: 1px solid #eeeeee;
+
+    border-top-left-radius: 4px;
+
+}
+
+
+
+/* =====================================================
+   USER MESSAGE
+===================================================== */
+
+.support-message.user {
+
+    margin-left: auto;
+
+    background: #7c3aed;
+
+    color: #ffffff;
+
+    border-top-right-radius: 4px;
+
+}
+
+
+
+/* =====================================================
+   QUICK QUESTIONS
+===================================================== */
+
+.support-quick {
+
+    padding: 8px 10px;
+
+    display: flex;
+
+    gap: 6px;
+
+    flex-wrap: wrap;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+
+}
+
+
+.support-quick button {
+
+    border: 1px solid #dddddd;
+
+    background: #ffffff;
+
+    color: #5b21b6;
+
+    border-radius: 20px;
+
+    padding: 6px 9px;
+
+    font-size: 10px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.15s ease,
+        border-color 0.15s ease;
+
+}
+
+
+.support-quick button:hover {
+
+    background: #f5f3ff;
+
+    border-color: #c4b5fd;
+
+}
+
+
+
+/* =====================================================
+   INPUT AREA
+===================================================== */
+
+.support-input-area {
+
+    display: flex;
+
+    align-items: center;
+
+    padding: 10px;
+
+    background: #ffffff;
+
+    border-top: 1px solid #eeeeee;
+
+}
+
+
+
+/* =====================================================
+   INPUT
+===================================================== */
+
+#support-input {
+
+    flex: 1;
+
+    min-width: 0;
+
+    border: 1px solid #dddde7;
+
+    border-radius: 10px;
+
+    padding: 11px 12px;
+
+    outline: none;
+
+    font-size: 13px;
+
+    background: #ffffff;
+
+}
+
+
+#support-input:focus {
+
+    border-color: #7c3aed;
+
+    box-shadow:
+        0 0 0 2px rgba(124, 58, 237, 0.08);
+
+}
+
+
+
+/* =====================================================
+   SEND BUTTON
+===================================================== */
+
+#support-send {
+
+    width: 40px;
+
+    height: 40px;
+
+    margin-left: 7px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #7c3aed;
+
+    color: white;
+
+    cursor: pointer;
+
+    font-size: 16px;
+
+}
+
+
+#support-send:hover {
+
+    opacity: 0.9;
+
+}
+
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 480px) {
+
+
+    #support-widget {
+
+        right: 15px;
+
+        bottom: 15px;
+
+    }
+
+
+    .support-chat {
+
+        width: calc(100vw - 30px);
+
+        height: 70vh;
+
+        bottom: 68px;
+
+    }
+
+
+    .support-button {
+
+        width: 54px;
+
+        height: 54px;
+
+    }
+
+
+    .support-avatar {
+
+        width: 40px;
+
+        height: 40px;
+
+        min-width: 40px;
+
+    }
+
+
+}
+
+
+
+</style>
+
+
+
+<!-- =====================================================
+     SUPPORT JAVASCRIPT
+===================================================== -->
+
+<script src="{% static 'js/support.js' %}"></script>
+
 
 </body>
+
 </html>
